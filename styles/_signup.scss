@@ -1,0 +1,23 @@
+.login.header {
+    height: auto;
+}
+
+.form-login {
+    background-color: $white;
+    border-radius: 24px;
+    padding: 24px 24px 30px;
+    row-gap: 20px;
+    width: 100%;
+    max-width: 460px;
+
+    input {
+        padding: 13px 16px;
+        border-radius: 14px;
+        border: 1.5px solid $navy;
+
+        &:focus {
+            box-shadow: none;
+            border-color: $green;
+        }
+    }
+}

@@ -1,0 +1,106 @@
+.checkout {
+    padding: 100px 0;
+    color: $white;
+
+    .checkout-title {
+        font-size: 32px;
+        font-weight: map-get($map: $font-weight, $key: semi-bold);
+    }
+
+    .event-details {
+        margin-top: 70px;
+        margin-bottom: 50px;
+
+        .event-image {
+            border-radius: 30px;
+            object-fit: cover;
+            width: 368px;
+            height: 255px;
+        }
+
+        h5 {
+            @extend .checkout-title;
+            font-size: 22px;
+            line-height: 30px;
+        }
+
+        span {
+            font-size: 16px;
+            font-weight: map-get($map: $font-weight, $key: regular);
+        }
+
+        .total-price {
+            border-bottom: 5px double $white;
+            font-weight: map-get($map: $font-weight, $key: bold);
+            font-size: 42px;
+            margin-left: 70px;
+        }
+    }
+
+    form {
+        .form-title {
+            font-size: 20px;
+            margin-bottom: 30px;
+
+            span {
+                font-weight: map-get($map: $font-weight, $key: regular);
+                color: $gray;
+            }
+
+            div {
+                font-weight: map-get($map: $font-weight, $key: medium);
+            }
+        }
+
+        input.form-control {
+            padding: 13px 16px;
+            background-color: transparent;
+            border: 1px solid $white;
+            border-radius: 14px;
+            color: $white !important;
+        }
+
+        .footer-payment {
+            margin-top: 100px;
+
+            .btn-green {
+                width: 231px;
+            }
+
+            span {
+                font-size: 14px;
+                font-weight: map-get($map: $font-weight, $key: regular);
+            }
+        }
+
+    }
+
+}
+
+@media (max-width: 992px) {
+    .checkout {
+
+        .event-details {
+
+            .event-image {
+                width: 100%;
+                height: 400px;
+            }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .checkout {
+        .event-details {
+            .event-image {
+                width: 100%;
+                height: 255px;
+            }
+
+            .total-price {
+                margin: 0 auto;
+            }
+        }
+    }
+}

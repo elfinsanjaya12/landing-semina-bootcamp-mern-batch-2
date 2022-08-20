@@ -1,0 +1,48 @@
+.navbar {
+    padding: 20px 0;
+
+    .navbar-nav {
+        .nav-link {
+            color: $gray;
+            font-size: 16px;
+            font-weight: map-get($map: $font-weight, $key: regular);
+
+            &.active {
+                color: $white;
+                border-bottom: 2px solid $green;
+                padding-right: 0;
+                padding-left: 0;
+                padding-bottom: 0;
+            }
+        }
+
+        .dropdown-menu {
+            padding: 12px;
+            border-radius: 18px;
+
+            .dropdown-item {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                border-radius: 48px;
+            }
+        }
+
+        .list-group {
+            .list-group-item {
+                background-color: transparent !important;
+                color: $gray;
+            }
+        }
+    }
+}
+
+@media (min-width: 1000px) {
+    .navbar {
+
+        .navbar-nav {
+            .nav-link {
+                margin: 0 30px;
+            }
+        }
+    }
+}

@@ -1,0 +1,228 @@
+.preview-image {
+    overflow-x: hidden;
+    padding: 100px 0 0;
+    border: none;
+    height: 1080px;
+
+    .img-content {
+        width: 75%;
+        max-width: 1055px;
+        border-radius: 30px;
+        object-fit: cover;
+    }
+}
+
+.details-content {
+    margin-top: -240px;
+    padding-bottom: 70px;
+
+    .gap {
+        column-gap: 100px;
+        row-gap: 75px;
+    }
+
+    .description {
+        margin-top: 24px;
+        max-width: 596px;
+
+        .headline {
+            font-weight: map-get($map: $font-weight, $key: semi-bold);
+            font-size: 42px;
+            color: $white;
+        }
+
+        .event-details {
+            margin-top: 140px;
+
+        }
+
+        h6 {
+            color: $navy;
+            font-size: 20px;
+            font-weight: map-get($map: $font-weight, $key: semi-bold);
+        }
+
+        .details-paragraph {
+            color: $soft_navy;
+            font-size: 16px;
+            font-weight: map-get($map: $font-weight, $key: regular);
+            line-height: 34px;
+            margin-top: 20px;
+        }
+
+        .keypoints {
+            @extend .details-paragraph;
+            margin-top: 50px;
+            line-height: 26px;
+
+            div {
+                margin-top: 16px;
+            }
+        }
+
+        .map-location {
+            margin-top: 50px;
+
+            h6 {
+                margin-bottom: 20px;
+            }
+
+            .map-placeholder {
+                padding: 8px;
+                border-radius: 18px;
+                border: 1px solid #DFDFDF;
+                width: max-content;
+
+                .maps {
+                    position: relative;
+                    overflow: hidden;
+
+                    img {
+                        border-radius: 18px;
+                        width: 442px;
+                        height: 295px;
+                        object-fit: cover;
+                    }
+
+                    .absolute {
+                        position: absolute;
+                        z-index: 1;
+                        left: 0;
+                        top: 0;
+                        bottom: 0;
+                        right: 0;
+                        border-radius: 18px;
+                        transition: all .3s;
+
+                        .btn-navy {
+                            padding: 8px 12px !important;
+                            font-size: 10px !important;
+                            opacity: 0;
+
+                            &:hover {
+                                box-shadow: 0px 4px 15px rgba(19, 19, 29, 0.35);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .card-event {
+        padding: 24px;
+        background-color: $white;
+        border-radius: 24px;
+        border: 1px solid #DFDFDF;
+        height: max-content;
+
+        h6 {
+            color: $navy;
+            font-size: 18px;
+            font-weight: map-get($map: $font-weight, $key: medium);
+            margin-bottom: 0;
+        }
+
+        .speaker-name {
+            color: $navy;
+            font-size: 16px;
+            font-weight: map-get($map: $font-weight, $key: medium);
+        }
+
+        .occupation {
+            color: $gray;
+            font-size: 14px;
+            font-weight: map-get($map: $font-weight, $key: regular);
+        }
+
+        hr {
+            margin: 30px 0;
+            color: #DFDFDF;
+        }
+
+        .price {
+            color: $navy;
+            font-size: 42px;
+            font-weight: map-get($map: $font-weight, $key: bold);
+
+            span {
+                @extend .occupation;
+                font-size: 16px;
+            }
+        }
+
+        .card-details {
+            color: $navy;
+            font-size: 16px;
+            font-weight: map-get($map: $font-weight, $key: regular);
+            margin-bottom: 16px;
+        }
+
+        .btn-green {
+            margin-top: 14px;
+            width: 302px;
+        }
+    }
+}
+
+@media (max-width:1200px) {
+
+    .preview-image {
+        height: 850px;
+    }
+}
+
+@media (max-width: 992px) {
+
+    .preview-image {
+        height: 750px;
+
+        .img-content {
+            width: 70%;
+        }
+    }
+
+    .details-content {
+
+        .card-event {
+            margin: 0 auto;
+        }
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .preview-image {
+        height: 650px;
+
+        .img-content {
+            width: 90%;
+        }
+    }
+
+    .details-content {
+        margin-top: -280px;
+
+        .description {
+            max-width: 100%;
+
+            .map-location {
+                margin-top: 50px;
+
+                h6 {
+                    margin-bottom: 20px;
+                }
+
+                .map-placeholder {
+                    width: 100%;
+
+                    .maps {
+                        max-width: 100%;
+                    }
+                }
+            }
+        }
+    }
+
+}

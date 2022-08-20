@@ -1,0 +1,44 @@
+.main-btn {
+    padding: 13px 35px;
+    border-radius: 45px;
+    font-size: 16px;
+    border: 0;
+    text-align: center;
+    text-decoration: none;
+    transition: ease-out .3s;
+    outline: none;
+
+}
+
+.btn-navy {
+    @extend .main-btn;
+    background-color: $soft_navy;
+    font-weight: map-get($map: $font-weight, $key: medium);
+    color: $white;
+
+    &:hover {
+        color: $white;
+    }
+
+    &:focus {
+        outline: 2.5px solid rgba(196, 196, 196, 0.75);
+    }
+}
+
+.btn-green {
+    @extend .main-btn;
+    color: $navy;
+    font-weight: map-get($map: $font-weight, $key: semi-bold);
+    background-color: $green;
+    box-shadow: 0px 4px 15px rgba(1, 251, 52, 0.35);
+
+    &:hover {
+        color: initial;
+    }
+}
+
+@media (max-width: 992px) {
+    .btn-navy {
+        max-width: 100%;
+    }
+}

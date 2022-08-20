@@ -1,0 +1,36 @@
+footer {
+    padding: 70px 0;
+
+    .footer-content {
+        column-gap: 150px;
+        row-gap: 48px;
+
+        .footer-links {
+            font-size: 16px;
+
+            .title-links {
+                font-weight: map-get($map: $font-weight, $key: medium);
+                color: $white;
+            }
+
+            a {
+                font-weight: map-get($map: $font-weight, $key: regular);
+                color: $gray;
+                transition: all .3s;
+                text-decoration: none;
+                margin-bottom: 8px;
+
+                &:hover {
+                    color: $white;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .all-rights {
+        margin-top: 70px;
+        margin-bottom: 0;
+    }
+
+}
