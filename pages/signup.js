@@ -2,8 +2,11 @@ import Head from 'next/head';
 import Brand from '../components/Brand';
 import Navbar from '../components/Navbar';
 import FormSignup from '../components/FormSignup';
+import { useRouter } from 'next/router';
+import TextInput from '../components/TextInput';
+import Button from '../components/Button';
 
-export default function Home() {
+export default function Signin() {
   return (
     <>
       <Head>

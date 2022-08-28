@@ -6,8 +6,11 @@ import FormCheckout from '../../components/FormCheckout';
 import Navbar from '../../components/Navbar';
 import { getData } from '../../utils/fetchData';
 import { formatDate } from '../../utils/formatDate';
+import { useRouter } from 'next/router';
 
 export default function Checkout({ detailPage }) {
+  const router = useRouter();
+  const { ticketId } = router.query;
   return (
     <>
       <Head>
@@ -47,13 +50,20 @@ export default function Checkout({ detailPage }) {
               </div>
             </div>
             <div className='total-price'>
-              {' '}
-              {detailPage.price === 0 ? 'free' : `$${detailPage.price}`}
+              {detailPage.tickets.map((ticket) => (
+                <>
+                  {ticket._id === ticketId
+                    ? ticket.price === 0
+                      ? 'free'
+                      : `$${ticket.price}`
+                    : ''}
+                </>
+              ))}
             </div>
           </div>
 
           {/* form */}
-          <FormCheckout />
+          <FormCheckout tickets={detailPage.tickets} />
         </div>
       </section>
       <Footer />
@@ -72,12 +82,10 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  const req = await getData(
-    `api/v1/participants/detail-page/${context.params.id}`
-  );
-  const res = req.data;
+  const req = await getData(`/api/v1/events/${context.params.id}`);
 
+  const res = req.data;
   return {
-    props: { detailPage: res, id: context.params.id },
+    props: { detailPage: res },
   };
 }

@@ -17,3 +17,10 @@ export async function postData(url, payload, token) {
     },
   });
 }
+export async function putData(url, payload, token) {
+  return await axios.put(`${url}`, payload, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}

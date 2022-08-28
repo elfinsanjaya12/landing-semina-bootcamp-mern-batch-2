@@ -29,12 +29,15 @@ export default function DetailPage({ detailPage, id }) {
   }, []);
 
   const router = useRouter();
-  const handleSubmit = () => {
+
+  const handleSubmit = (ticketId, organizer) => {
     const token = Cookies.get('token');
     if (!token) {
       return router.push('/signin');
     } else {
-      router.push(`/checkout/${id}`);
+      router.push(
+        `/checkout/${id}?ticketId=${ticketId}&organizer=${organizer}`
+      );
     }
   };
   return (
@@ -109,30 +112,43 @@ export default function DetailPage({ detailPage, id }) {
             <hr />
 
             <h6>Get Ticket</h6>
-            <div className='price my-3'>
-              {detailPage.tickets[0].price === 0
-                ? 'free'
-                : `$${detailPage.tickets[0].price}`}
-              <span>/person</span>
-            </div>
-            <div className='d-flex gap-3 align-items-center card-details'>
-              <img src='/icons/ic-marker.svg' alt='semina' />{' '}
-              {detailPage.venueName}
-            </div>
-            <div className='d-flex gap-3 align-items-center card-details'>
-              <img src='/icons/ic-time.svg' alt='semina' />{' '}
-              {moment(detailPage.date).format('HH.MM A')}
-            </div>
-            <div className='d-flex gap-3 align-items-center card-details'>
-              <img src='/icons/ic-calendar.svg' alt='semina' />{' '}
-              {formatDate(detailPage.date)}
-            </div>
+            {detailPage.tickets.map((ticket) => (
+              <>
+                {ticket.statusTicketCategories ? (
+                  <>
+                    <div className='price my-3'>
+                      {ticket.price === 0 ? 'free' : `$${ticket.price}`}
+                      <span>/person</span>
+                    </div>
+                    <div className='d-flex gap-3 align-items-center card-details'>
+                      <img src='/icons/ic-marker.svg' alt='semina' />{' '}
+                      {detailPage.venueName}
+                    </div>
+                    <div className='d-flex gap-3 align-items-center card-details'>
+                      <img src='/icons/ic-time.svg' alt='semina' />{' '}
+                      {moment(detailPage.date).format('HH.MM A')}
+                    </div>
+                    <div className='d-flex gap-3 align-items-center card-details'>
+                      <img src='/icons/ic-calendar.svg' alt='semina' />{' '}
+                      {formatDate(detailPage.date)}
+                    </div>
 
-            {detailPage.stock !== 0 && (
-              <Button variant={'btn-green'} action={() => handleSubmit()}>
-                Join Now
-              </Button>
-            )}
+                    {detailPage.stock !== 0 && (
+                      <Button
+                        variant={'btn-green'}
+                        action={() =>
+                          handleSubmit(ticket._id, detailPage.organizer)
+                        }
+                      >
+                        Join Now
+                      </Button>
+                    )}
+                  </>
+                ) : (
+                  ''
+                )}
+              </>
+            ))}
           </div>
         </div>
       </div>
@@ -147,7 +163,9 @@ export default function DetailPage({ detailPage, id }) {
 
 export async function getServerSideProps(context) {
   const req = await getData(`api/v1/events/${context.params.id}`);
+
   const res = req.data;
+  console.log(res);
 
   return {
     props: { detailPage: res, id: context.params.id },

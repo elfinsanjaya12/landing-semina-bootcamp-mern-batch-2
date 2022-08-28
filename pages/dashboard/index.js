@@ -29,11 +29,6 @@ export default function Dashboard({ data }) {
               className='event-details container d-flex flex-wrap justify-content-lg-center align-items-center gap-5'
               key={data._id}
             >
-              <img
-                src={`${process.env.NEXT_PUBLIC_API_IMAGE}/${data.historyEvent.cover}`}
-                className='event-image'
-                alt='semina'
-              />
               <div className='d-flex flex-column gap-3'>
                 <h5>{data.historyEvent.title}</h5>
 
@@ -44,7 +39,6 @@ export default function Dashboard({ data }) {
                 <div className='d-flex align-items-center gap-3'>
                   <img src='/icons/ic-time-white.svg' alt='' />
                   <span>
-                    {' '}
                     {moment(data.historyEvent.date).format('HH.MM A')}
                   </span>
                 </div>
@@ -54,10 +48,7 @@ export default function Dashboard({ data }) {
                 </div>
               </div>
               <div className='total-price'>
-                {' '}
-                {data.historyEvent.price === 0
-                  ? 'free'
-                  : `$${data.historyEvent.price}`}
+                {data.totalPay === 0 ? 'free' : `$${data.totalPay}`}
               </div>
             </div>
           ))}
@@ -69,13 +60,11 @@ export default function Dashboard({ data }) {
 }
 
 export async function getServerSideProps(context) {
-  const req = await getData(
-    `api/v1/participants/dashboard`,
-    {},
-    context.req.cookies.token
-  );
+  const req = await getData(`/api/v1/orders`, {}, context.req.cookies.token);
 
   const res = req.data;
+
+  console.log(res);
 
   return {
     props: { data: res },

@@ -18,21 +18,19 @@ export default function FormSignin() {
   };
 
   const handleSubmit = async () => {
-    try {
-      const res = await postData('api/v1/participants/auth/signin', form);
+    const res = await postData('/api/v1/auth/signin', form);
 
-      toast.success('berhasil signin', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      Cookies.set('token', res.data.token);
-      router.push('/');
-    } catch (err) {}
+    toast.success('berhasil signin', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    Cookies.set('token', res.data.token);
+    router.push('/');
   };
 
   return (

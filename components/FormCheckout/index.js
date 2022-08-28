@@ -6,8 +6,9 @@ import { getData, postData } from '../../utils/fetchData';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 
-export default function FormCheckout() {
+export default function FormCheckout({ tickets }) {
   const router = useRouter();
+  const { ticketId, organizer } = router.query;
 
   const [form, setForm] = useState({
     email: '',
@@ -23,7 +24,11 @@ export default function FormCheckout() {
   useEffect(() => {
     const fetctData = async () => {
       try {
-        const res = await getData('api/v1/participants/payments');
+        const res = await getData(
+          `api/v1/payments/${organizer}`,
+          {},
+          Cookies.get('token')
+        );
         res.data.forEach((res) => {
           res.isChecked = false;
         });
@@ -54,8 +59,21 @@ export default function FormCheckout() {
 
   const handleSubmit = async () => {
     try {
+      const _temp = [];
+      tickets.forEach((t) => {
+        if (t._id === ticketId) {
+          _temp.push({
+            ticketCategories: {
+              type: t.type,
+              price: t.price,
+            },
+            sumTicket: 1,
+          });
+        }
+      });
       let payload = {
         event: form.event,
+        tickets: _temp,
         payment: form.payment,
         personalDetail: {
           lastName: form.lastName,
@@ -65,7 +83,7 @@ export default function FormCheckout() {
         },
       };
       const res = await postData(
-        'api/v1/participants/checkout',
+        'api/v1/checkout',
         payload,
         Cookies.get('token')
       );
